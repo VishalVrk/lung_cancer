@@ -49,26 +49,6 @@ def annotate_pneumonia(img):
     green_overlay = np.zeros(img.shape, img.dtype)
     green_overlay[:, :] = (0, 255, 0)  # Green color
     img = cv2.addWeighted(img, 0.95, green_overlay, 0.1, 0)
-
-    # Define the quadrants for annotation
-    height, width, _ = img.shape
-    half_height, half_width = height // 2, width // 2
-    quadrants = [
-        (0, 0, half_width, half_height),
-        (half_width, 0, width, half_height),
-        (0, half_height, half_width, height),
-        (half_width, half_height, width, height),
-    ]
-
-    for x1, y1, x2, y2 in quadrants:
-        # Randomly position bounding box in each quadrant
-        box_x = random.randint(x1, x2 - 50)
-        box_y = random.randint(y1, y2 - 20)
-        box_w, box_h = 100, 30  # Width and height of bounding box
-        
-        # Draw the bounding box
-        cv2.rectangle(img, (box_x, box_y), (box_x + box_w, box_y + box_h), (0, 255, 0), 2)
-    
     return img
 
 # Route for the main page
